@@ -1,7 +1,7 @@
 ( function() {
 	var iframe = document.createElement( 'iframe' );
 
-	iframe.src = 'http://comandeer.github.io/tracker.html#' + encodeURIComponent( location.href );
+	iframe.src = 'http://comandeer.github.io/tabs-tracker/tracker.html#' + encodeURIComponent( location.href );
 	iframe.style.display = 'none';
 
 	iframe.addEventListener( 'load', function() {

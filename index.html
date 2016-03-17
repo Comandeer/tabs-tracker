@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>Tabs-tracker</title>	
+<h1>What is it?</h1>
+<p>It's a small experiment with trying to get list of user's open tabs. It requires the pages to have a small tracker script, so probably you are not able to use it in practice – unless you're a Facebook engineer working on "Like it!" widget.</p>
+<p>That page has a tracker built-in. To see it in action, just open the console and open this page a few times in new tabs – the result should be updated in real time. It is of course cross-domain, just <a href="http://bzdety.comandeer.pl/tab-tracker.html" target="_blank">check a tracked page on <b>bzdety.comandeer.pl</b></a>.</p>
+<p>If you're curious how I did it – the tracker uses two techniques: <a href="https://ponyfoo.com/articles/cross-tab-communication">cross-tab communication via <code>storage</code> event</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">communication between <code>iframe</code> and parent's window via <code>postMessage</code> API</a>.</p>
+<p><b>Tested in latest Chrome and Firefox.</b></p>
+<script src="tracker.js"></script>

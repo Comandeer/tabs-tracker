@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>Tracker</title>
+<script>
+	window.addEventListener( 'load', function() {
+		var id = Math.floor( ( 1 + Math.random() ) * 0x10000 ).toString( 16 ) + Math.floor( ( 1 + Math.random() ) * 99999 ),
+		tabs = getFromLocalStorage(),
+		link = document.createElement( 'a' );
+
+		function pushUpdate() {
+			window.parent.postMessage( JSON.parse( localStorage.getItem( 'openTabs' ) ), link.origin );
+		}
+
+		function getFromLocalStorage() {
+			return localStorage.getItem( 'openTabs' ) ? JSON.parse( localStorage.getItem( 'openTabs' ) ) : {};
+		}
+
+		function saveToLocalStorage( tabs ) {
+			localStorage.setItem( 'openTabs', JSON.stringify( tabs ) );
+		}
+
+		link.href = decodeURIComponent( location.hash.substring( 1 ) );
+		tabs[ id ] = link.href;
+
+		saveToLocalStorage( tabs );
+		pushUpdate();
+
+		window.addEventListener( 'storage', function( evt ) {
+			if ( evt.key === 'openTabs' ) {
+				pushUpdate();
+			}
+		}, false );
+
+		window.addEventListener( 'message', function( evt ) {
+			var tabs = getFromLocalStorage();
+
+			if ( evt.origin !== link.origin ) {
+				return;
+			}
+
+			delete tabs[ id ];
+			saveToLocalStorage( tabs );
+		}, false );
+	}, false );
+</script>
